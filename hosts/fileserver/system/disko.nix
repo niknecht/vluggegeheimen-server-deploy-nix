@@ -23,6 +23,7 @@
             content = {
               type = "luks";
               name = "cryptroot";
+              passwordFile = "/tmp/root.key";
               initrdUnlock = true;
               content = {
                 type = "filesystem";
@@ -47,6 +48,7 @@
           size = "100%";
           content = {
             type = "luks";
+            passwordFile = "${/tmp/share2tb.key}";
             name = "crypt-share-2tb";
             content = {
               type = "lvm_pv";
