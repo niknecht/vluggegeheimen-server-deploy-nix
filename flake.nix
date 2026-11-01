@@ -12,14 +12,15 @@
 		system = "x86_64-linux";
 		pkgs = import nixpkgs { inherit system; overlays = [ (import ./hosts/fileserver/pkgs/overlay.nix) ]; };
 	in {
-    nixosConfiguration.fileserver = {
-      modules = [
-        disko.nixosModules.disko
-        ./hosts/fileserver/system/disko.nix
-        ./hosts/fileserver/system/configuration.nix
-        ./hosts/fileserver/system/hardware-configuration.nix
-      ];
-    };
+    nixosConfigurations.fileserver = nixpkgs.lib.nixosSystem {
+    inherit system;
+    modules = [
+      disko.nixosModules.disko
+      ./hosts/fileserver/system/disko.nix
+      ./hosts/fileserver/system/configuration.nix
+      ./hosts/fileserver/system/hardware-configuration.nix
+    ];
+  };
 	}
 	//
 	flake-utils.lib.eachDefaultSystem(system: {

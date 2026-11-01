@@ -1,5 +1,5 @@
 {
-  disco.devices.disk = {
+  disko.devices.disk = {
     ssd = {
       type = "disk";
       device = "/dev/disk/by-id/wwn-0x5dc663aa0433aa2";
@@ -14,7 +14,7 @@
               type = "filesystem";
               format = "vfat";
               mountpoint = "/boot/efi";
-              mountoptions = [ "umask=0077" ];
+              mountOptions = [ "umask=0077" ];
             };
           };
           luksroot = {
@@ -29,7 +29,7 @@
                 type = "filesystem";
                 format = "ext4";
                 mountpoint = "/";
-                mountoptions = [ "noatime" ];
+                mountOptions = [ "noatime" ];
               }
             };
           };
@@ -69,7 +69,7 @@
         type = "filesystem";
         format = "xfs";
         mountpoint = "/srv/disks/share-2tb";
-        mountoptions = [ "noatime" ];
+        mountOptions = [ "noatime" ];
       };
     };
   };
