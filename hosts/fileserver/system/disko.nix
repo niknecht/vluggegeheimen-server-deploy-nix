@@ -2,7 +2,7 @@
   disko.devices.disk = {
     ssd = {
       type = "disk";
-      device = "/dev/disk/by-id/wwn-0x5dc663aa0433aa2";
+      device = "/dev/disk/by-id/wwn-0x5dc663a5a0433aa2";
       content = {
         type = "gpt";
         partitions = {
@@ -17,8 +17,7 @@
               mountOptions = [ "umask=0077" ];
             };
           };
-          luksroot = {
-            priority = 2;
+          luksroot = { priority = 2;
             size = "100%";
             content = {
               type = "luks";
@@ -30,7 +29,7 @@
                 format = "ext4";
                 mountpoint = "/";
                 mountOptions = [ "noatime" ];
-              }
+              };
             };
           };
         };
@@ -43,19 +42,17 @@
     device = "/dev/disk/by-id/wwn-0x5000039e35600f3c";
     content = {
       type = "gpt";
-      partitions.data = {
-        share = {
+      partitions.share = {
           size = "100%";
           content = {
             type = "luks";
-            passwordFile = "${/tmp/share2tb.key}";
+            passwordFile = "/tmp/share2tb.key";
             name = "crypt-share-2tb";
             content = {
               type = "lvm_pv";
               vg = "vg_share2tb";
             };
           };
-        };
       };
     };
   };
@@ -74,16 +71,21 @@
     };
   };
   
-  /*disko.devices.disk.hdd4tb = {
+  disko.devices.disk.hdd4tb = {
     type = "disk";
-    device = "/dev/disk/by-id/REPLACE_WITH_4TB_HDD_ID"; // TODO: Change here
+    device = "/dev/disk/by-id/wwn-0x5000c501135b4fc3";
     content = {
       type = "gpt";
-      partitions.data = {
+      partitions.share = {
         size = "100%";
         content = {
-          type = "lvm_pv";
-          vg = "vg_share4";
+          type = "luks";
+          passwordFile = "/tmp/share4tb.key";
+          name = "crypt-share-4tb";
+          content = {
+            type = "lvm_pv";
+            vg = "vg_share4";
+          };
         };
       };
     };
@@ -100,5 +102,5 @@
         mountOptions = [ "noatime" ];
       };
     };
-  };*/
+  };
 }
